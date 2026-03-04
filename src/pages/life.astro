@@ -1,0 +1,21 @@
+---
+import MainGridLayout from "../layouts/MainGridLayout.astro";
+---
+
+<MainGridLayout title="生活与杂谈">
+  <script>
+    import('../scripts/right-sidebar-layout.js');
+  </script>
+  <div class="flex w-full rounded-(--radius-large) overflow-hidden relative min-h-32">
+    <div class="card-base z-10 px-6 py-6 relative w-full">
+      <h1 class="text-3xl font-bold mb-4 text-90">生活与杂谈</h1>
+      <p class="text-75">
+        这里可以写日常生活、摄影、游戏体验、随想杂谈等内容。
+      </p>
+      <p class="text-75 mt-2">
+        目前是一个简单的占位页面，后面可以按生活相关分类自动聚合文章。
+      </p>
+    </div>
+  </div>
+</MainGridLayout>
+
