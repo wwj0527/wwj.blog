@@ -1,21 +1,40 @@
 ---
 import MainGridLayout from "../layouts/MainGridLayout.astro";
+import PostPage from "../components/PostPage.astro";
+import { getSortedPosts } from "../utils/content-utils";
+import { initPostIdMap } from "../utils/permalink-utils";
+
+const allPosts = await getSortedPosts();
+initPostIdMap(allPosts);
+
+const categoryName = "数学与理科";
+const sciencePosts = allPosts.filter(
+  (post) => post.data.category?.trim() === categoryName
+);
+
+const page = { data: sciencePosts };
 ---
 
 <MainGridLayout title="数学与理科">
   <script>
     import('../scripts/right-sidebar-layout.js');
   </script>
-  <div class="flex w-full rounded-(--radius-large) overflow-hidden relative min-h-32">
+  <div class="flex w-full rounded-(--radius-large) overflow-hidden relative min-h-32 mb-4">
     <div class="card-base z-10 px-6 py-6 relative w-full">
       <h1 class="text-3xl font-bold mb-4 text-90">数学与理科</h1>
       <p class="text-75">
-        这里用于放「数学与理科」相关的内容，例如数学笔记、物理题解（滑板-滑块问题）、化学热力学等。
-      </p>
-      <p class="text-75 mt-2">
-        之后可以实现按分类自动列出相关文章，目前先作为导航落地点。
+        这里按「数学与理科」主题整理文章（数学笔记、物理题解、化学热力学等）。
       </p>
     </div>
   </div>
+  {
+    sciencePosts.length > 0 ? (
+      <PostPage page={page} />
+    ) : (
+      <div class="card-base px-6 py-8 text-center text-75">
+        暂无「数学与理科」分类的文章，写一篇吧！
+      </div>
+    )
+  }
 </MainGridLayout>
 

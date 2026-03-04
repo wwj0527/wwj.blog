@@ -1,21 +1,40 @@
 ---
 import MainGridLayout from "../layouts/MainGridLayout.astro";
+import PostPage from "../components/PostPage.astro";
+import { getSortedPosts } from "../utils/content-utils";
+import { initPostIdMap } from "../utils/permalink-utils";
+
+const allPosts = await getSortedPosts();
+initPostIdMap(allPosts);
+
+const categoryName = "人文与语言";
+const humanityPosts = allPosts.filter(
+  (post) => post.data.category?.trim() === categoryName
+);
+
+const page = { data: humanityPosts };
 ---
 
 <MainGridLayout title="人文与语言">
   <script>
     import('../scripts/right-sidebar-layout.js');
   </script>
-  <div class="flex w-full rounded-(--radius-large) overflow-hidden relative min-h-32">
+  <div class="flex w-full rounded-(--radius-large) overflow-hidden relative min-h-32 mb-4">
     <div class="card-base z-10 px-6 py-6 relative w-full">
       <h1 class="text-3xl font-bold mb-4 text-90">人文与语言</h1>
       <p class="text-75">
-        这里用于记录外语学习（如日语、英语）、人文社科、读书笔记等内容。
-      </p>
-      <p class="text-75 mt-2">
-        未来可以做成专门的人文/语言文章列表页面。
+        这里按「人文与语言」主题整理文章（外语学习、人文社科、读书笔记等）。
       </p>
     </div>
   </div>
+  {
+    humanityPosts.length > 0 ? (
+      <PostPage page={page} />
+    ) : (
+      <div class="card-base px-6 py-8 text-center text-75">
+        暂无「人文与语言」分类的文章，写一篇吧！
+      </div>
+    )
+  }
 </MainGridLayout>
 

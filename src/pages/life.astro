@@ -1,21 +1,40 @@
 ---
 import MainGridLayout from "../layouts/MainGridLayout.astro";
+import PostPage from "../components/PostPage.astro";
+import { getSortedPosts } from "../utils/content-utils";
+import { initPostIdMap } from "../utils/permalink-utils";
+
+const allPosts = await getSortedPosts();
+initPostIdMap(allPosts);
+
+const categoryName = "生活与杂谈";
+const lifePosts = allPosts.filter(
+  (post) => post.data.category?.trim() === categoryName
+);
+
+const page = { data: lifePosts };
 ---
 
 <MainGridLayout title="生活与杂谈">
   <script>
     import('../scripts/right-sidebar-layout.js');
   </script>
-  <div class="flex w-full rounded-(--radius-large) overflow-hidden relative min-h-32">
+  <div class="flex w-full rounded-(--radius-large) overflow-hidden relative min-h-32 mb-4">
     <div class="card-base z-10 px-6 py-6 relative w-full">
       <h1 class="text-3xl font-bold mb-4 text-90">生活与杂谈</h1>
       <p class="text-75">
-        这里可以写日常生活、摄影、游戏体验、随想杂谈等内容。
-      </p>
-      <p class="text-75 mt-2">
-        目前是一个简单的占位页面，后面可以按生活相关分类自动聚合文章。
+        这里按「生活与杂谈」主题整理文章（日常生活、摄影、游戏体验、随想杂谈等）。
       </p>
     </div>
   </div>
+  {
+    lifePosts.length > 0 ? (
+      <PostPage page={page} />
+    ) : (
+      <div class="card-base px-6 py-8 text-center text-75">
+        暂无「生活与杂谈」分类的文章，写一篇吧！
+      </div>
+    )
+  }
 </MainGridLayout>
 
