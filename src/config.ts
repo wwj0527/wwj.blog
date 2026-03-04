@@ -24,7 +24,7 @@ const SITE_TIMEZONE = 8; //设置你的网站时区 from -12 to 12 default in UT
 export const siteConfig: SiteConfig = {
 	title: "我的自留地",
 	subtitle: "记录编程、数学、生活的点滴",
-	siteURL: "http://localhost:4321/", // 先用本地开发地址，之后部署时再改成你的 .xyz 域名
+	siteURL: "https://20040527.xyz/", // 先用本地开发地址，之后部署时再改成你的 .xyz 域名
 	siteStartDate: "2026-03-04", // 站点开始运行日期，用于站点统计组件计算运行天数
 
 	timeZone: SITE_TIMEZONE,
@@ -54,8 +54,8 @@ export const siteConfig: SiteConfig = {
 		text: "我的自留地",
 		// 顶栏标题图标路径（左上角小图标）
 		icon: "assets/images/logo.png",
-		// 网站Logo图片路径：留空时使用内置 ../assets/images/logo.png
-		logo: "",
+		// 网站Logo：使用 public/assets/images/logo.png，替换此文件即可更换图标
+		logo: "/assets/images/logo.png",
 	},
 
 	// 页面自动缩放配置
@@ -116,23 +116,9 @@ export const siteConfig: SiteConfig = {
 	banner: {
 		// 支持单张图片或图片数组，当数组长度 > 1 时自动启用轮播
 		src: {
-			desktop: [
-				"/assets/desktop-banner/1.webp",
-				"/assets/desktop-banner/2.webp",
-				"/assets/desktop-banner/3.webp",
-				"/assets/desktop-banner/4.webp",
-				"/assets/desktop-banner/5.webp",
-				"/assets/desktop-banner/6.webp",
-			], // 桌面横幅图片
-			mobile: [
-				"/assets/mobile-banner/1.webp",
-				"/assets/mobile-banner/2.webp",
-				"/assets/mobile-banner/3.webp",
-				"/assets/mobile-banner/4.webp",
-				"/assets/mobile-banner/5.webp",
-				"/assets/mobile-banner/6.webp",
-			], // 移动横幅图片
-		}, // 使用本地横幅图片
+			desktop: ["/assets/web.jpg"], // 桌面横幅图片
+			mobile: ["/assets/web.jpg"], // 移动横幅图片
+		}, // 使用 web.jpg 作为横幅
 
 		position: "center", // 等同于 object-position，仅支持 'top', 'center', 'bottom'。默认为 'center'
 
@@ -158,14 +144,11 @@ export const siteConfig: SiteConfig = {
 
 		homeText: {
 			enable: true, // 在主页显示自定义文本
-			title: "わたしの部屋", // 主页横幅主标题
+			title: "欢迎光临", // 主页横幅主标题
 
 			subtitle: [
-				"特別なことはないけど、君がいると十分です",
-				"今でもあなたは私の光",
-				"君ってさ、知らないうちに私の毎日になってたよ",
-				"君と話すと、なんか毎日がちょっと楽しくなるんだ",
-				"今日はなんでもない日。でも、ちょっとだけいい日",
+				"问道何时葡萄先熟透，你要静候 再静候",
+				"通りすがりの仮面ライダーだ! 覚えておけ!",
 			],
 			typewriter: {
 				enable: true, // 启用副标题打字机效果
@@ -196,12 +179,9 @@ export const siteConfig: SiteConfig = {
 	showCoverInContent: true, // 在文章内容页显示文章封面
 	generateOgImages: false, // 启用生成OpenGraph图片功能,注意开启后要渲染很长时间，不建议本地调试的时候开启
 	favicon: [
-		// 留空以使用默认 favicon
-		// {
-		//   src: '/favicon/icon.png',    // 图标文件路径
-		//   theme: 'light',              // 可选，指定主题 'light' | 'dark'
-		//   sizes: '32x32',              // 可选，图标大小
-		// }
+		// 使用与顶栏相同的 logo，替换 public/assets/images/logo.png 即可同时更换顶栏图标和浏览器标签图标
+		{ src: "/assets/images/logo.png", theme: "light", sizes: "64x64" },
+		{ src: "/assets/images/logo.png", theme: "dark", sizes: "64x64" },
 	],
 
 	// 字体配置（改用系统字体，避免缺失字体 404）
@@ -225,23 +205,9 @@ export const siteConfig: SiteConfig = {
 };
 export const fullscreenWallpaperConfig: FullscreenWallpaperConfig = {
 	src: {
-		desktop: [
-			"/assets/desktop-banner/1.webp",
-			"/assets/desktop-banner/2.webp",
-			"/assets/desktop-banner/3.webp",
-			"/assets/desktop-banner/4.webp",
-			"/assets/desktop-banner/5.webp",
-			"/assets/desktop-banner/6.webp",
-		], // 桌面横幅图片
-		mobile: [
-			"/assets/mobile-banner/1.webp",
-			"/assets/mobile-banner/2.webp",
-			"/assets/mobile-banner/3.webp",
-			"/assets/mobile-banner/4.webp",
-			"/assets/mobile-banner/5.webp",
-			"/assets/mobile-banner/6.webp",
-		], // 移动横幅图片
-	}, // 使用本地横幅图片
+		desktop: ["/assets/web.jpg"], // 桌面全屏壁纸
+		mobile: ["/assets/web.jpg"], // 移动全屏壁纸
+	}, // 使用 web.jpg 作为全屏壁纸
 	position: "center", // 壁纸位置，等同于 object-position
 	carousel: {
 		enable: true, // 启用轮播
