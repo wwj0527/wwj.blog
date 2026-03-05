@@ -345,12 +345,13 @@ export const announcementConfig: AnnouncementConfig = {
 
 export const musicPlayerConfig: MusicPlayerConfig = {
 	enable: true, // 启用音乐播放器功能
-	mode: "meting", // 音乐播放器模式，可选 "local" 或 "meting"
+	mode: "spotify", // 音乐播放器模式：meting=网易云等 | local=本地音频 | spotify=Spotify 嵌入
 	meting_api:
-		"https://meting.mysqil.com/api?server=:server&type=:type&id=:id&auth=:auth&r=:r", // Meting API 地址
-	id: "14164869977", // 歌单ID
-	server: "netease", // 音乐源服务器。有的meting的api源支持更多平台,一般来说,netease=网易云音乐, tencent=QQ音乐, kugou=酷狗音乐, xiami=虾米音乐, baidu=百度音乐
+		"https://meting.mysqil.com/api?server=:server&type=:type&id=:id&auth=:auth&r=:r", // Meting API 地址（meting 模式用）
+	id: "14164869977", // 歌单ID（meting 模式用）
+	server: "netease", // 音乐源服务器
 	type: "playlist", // 播单类型
+	spotifyPlaylistId: "0SAg9BnVnUGj88OmYqUYIO", // soul 歌单
 };
 
 export const footerConfig: FooterConfig = {

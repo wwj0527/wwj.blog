@@ -8,8 +8,9 @@ import { musicPlayerConfig } from "../../config";
 import Key from "../../i18n/i18nKey";
 import { i18n } from "../../i18n/translation";
 
-// 音乐播放器模式，可选 "local" 或 "meting"，从本地配置中获取或使用默认值 "meting"
+// 音乐播放器模式，可选 "local"、"meting" 或 "spotify"
 let mode = musicPlayerConfig.mode ?? "meting";
+let spotifyPlaylistId = musicPlayerConfig.spotifyPlaylistId ?? "";
 // Meting API 地址，从配置中获取或使用默认地址(bilibili.uno(由哔哩哔哩松坂有希公益管理)),服务器在海外,部分音乐平台可能不支持并且速度可能慢,也可以自建Meting API
 let meting_api =
 	musicPlayerConfig.meting_api ??
@@ -417,7 +418,9 @@ onMount(() => {
 	if (!musicPlayerConfig.enable) {
 		return;
 	}
-	if (mode === "meting") {
+	if (mode === "spotify") {
+		// Spotify 模式：使用嵌入，无需加载歌单
+	} else if (mode === "meting") {
 		fetchMetingPlaylist();
 	} else {
 		// 使用本地播放列表，不发送任何API请求
@@ -460,6 +463,68 @@ onDestroy(() => {
 />
 
 {#if musicPlayerConfig.enable}
+{#if mode === "spotify" && spotifyPlaylistId.trim()}
+<!-- Spotify 嵌入模式 -->
+<div class="music-player fixed bottom-4 right-4 z-50 transition-all duration-300 ease-in-out"
+     class:expanded={isExpanded}
+     class:hidden-mode={isHidden}>
+    <div class="orb-player w-12 h-12 rounded-full shadow-lg cursor-pointer transition-all duration-500 ease-in-out flex items-center justify-center hover:scale-110 active:scale-95"
+         style="background: #1DB954;"
+         class:opacity-0={!isHidden}
+         class:scale-0={!isHidden}
+         class:pointer-events-none={!isHidden}
+         on:click={toggleHidden}
+         on:keydown={(e) => e.key === 'Enter' && (e.preventDefault(), toggleHidden())}
+         role="button" tabindex="0" aria-label={i18n(Key.musicPlayerShow)}>
+        <Icon icon="mdi:spotify" class="text-white text-2xl" />
+    </div>
+    <div class="mini-player card-base bg-(--float-panel-bg) shadow-xl rounded-2xl p-3 transition-all duration-500 ease-in-out"
+         class:opacity-0={isExpanded || isHidden}
+         class:scale-95={isExpanded || isHidden}
+         class:pointer-events-none={isExpanded || isHidden}>
+        <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-full overflow-hidden flex items-center justify-center" style="background: #1DB954;">
+                <Icon icon="mdi:spotify" class="text-white text-2xl" />
+            </div>
+            <div class="flex-1 min-w-0 cursor-pointer" on:click={toggleExpanded} role="button" tabindex="0">
+                <div class="text-sm font-medium text-90 truncate">Spotify</div>
+                <div class="text-xs text-50 truncate">点击展开播放</div>
+            </div>
+            <button class="btn-plain w-8 h-8 rounded-lg" on:click|stopPropagation={toggleHidden} title={i18n(Key.musicPlayerHide)}>
+                <Icon icon="material-symbols:visibility-off" class="text-lg" />
+            </button>
+            <button class="btn-plain w-8 h-8 rounded-lg" on:click|stopPropagation={toggleExpanded}>
+                <Icon icon="material-symbols:expand-less" class="text-lg" />
+            </button>
+        </div>
+    </div>
+    <div class="expanded-player card-base bg-(--float-panel-bg) shadow-xl rounded-2xl p-4 transition-all duration-500 ease-in-out"
+         class:opacity-0={!isExpanded}
+         class:scale-95={!isExpanded}
+         class:pointer-events-none={!isExpanded}>
+        <div class="flex items-center justify-between mb-3">
+            <span class="text-lg font-semibold text-90">Spotify</span>
+            <div class="flex gap-1">
+                <button class="btn-plain w-8 h-8 rounded-lg" on:click={toggleHidden} title={i18n(Key.musicPlayerHide)}>
+                    <Icon icon="material-symbols:visibility-off" class="text-lg" />
+                </button>
+                <button class="btn-plain w-8 h-8 rounded-lg" on:click={toggleExpanded} title={i18n(Key.musicPlayerCollapse)}>
+                    <Icon icon="material-symbols:expand-more" class="text-lg" />
+                </button>
+            </div>
+        </div>
+        <iframe
+            style="border-radius:12px; border:none;"
+            src="https://open.spotify.com/embed/playlist/{spotifyPlaylistId}?utm_source=generator"
+            width="100%"
+            height="352"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+            title="Spotify Playlist">
+        </iframe>
+    </div>
+</div>
+{:else if mode !== "spotify"}
 {#if showError}
 <div class="fixed bottom-20 right-4 z-60 max-w-sm">
     <div class="bg-red-500 text-white px-4 py-3 rounded-lg shadow-lg flex items-center gap-3 animate-slide-up">
@@ -749,6 +814,8 @@ onDestroy(() => {
         </div>
     {/if}
 </div>
+{/if}
+{/if}
 
 <style>
 .orb-player {
@@ -931,4 +998,3 @@ button.bg-\[var\(--primary\)\] {
 	border: none;
 }
 </style>
-{/if}
