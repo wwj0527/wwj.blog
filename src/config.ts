@@ -248,12 +248,8 @@ export const navBarConfig: NavBarConfig = {
 			url: "/life/",
 			icon: "material-symbols:coffee",
 		},
-		// 日志（使用内置 diary 页面）
-		{
-			name: "日志",
-			url: "/diary/",
-			icon: "material-symbols:book",
-		},
+		// 日记（使用内置 diary 页面）
+		LinkPreset.Diary,
 		// 关于我
 		{
 			name: "关于我",
@@ -333,11 +329,11 @@ export const shareConfig: ShareConfig = {
 
 export const announcementConfig: AnnouncementConfig = {
 	title: "", // 公告标题，填空使用i18n字符串Key.announcement
-	content: "ブログへようこそ！これはサンプルの告知です", // 公告内容
+	content: "嘟噜噜噜噜！", // 公告内容
 	closable: true, // 允许用户关闭公告
 	link: {
 		enable: true, // 启用链接
-		text: "Learn More", // 链接文本
+		text: "了解更多", // 链接文本
 		url: "/about/", // 链接 URL
 		external: false, // 内部链接
 	},
@@ -379,16 +375,6 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			class: "onload-animation",
 			// 动画延迟时间（毫秒），用于错开动画效果
 			animationDelay: 0,
-		},
-		{
-			// 组件类型：公告组件
-			type: "announcement",
-			// 组件位置："top" 表示固定在顶部
-			position: "top",
-			// CSS 类名
-			class: "onload-animation",
-			// 动画延迟时间
-			animationDelay: 50,
 		},
 		{
 			// 组件类型：分类组件
@@ -444,9 +430,9 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 
 	// 侧栏组件布局配置
 	components: {
-		left: ["profile", "announcement", "categories", "tags"],
+		left: ["profile", "categories", "tags"],
 		right: ["site-stats", "calendar"],
-		drawer: ["profile", "announcement", "categories", "tags"],
+		drawer: ["profile", "categories", "tags"],
 	},
 
 	// 默认动画配置
