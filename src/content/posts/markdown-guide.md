@@ -1,6 +1,6 @@
 ---
 title: Markdown 简单用法
-published: 2026-03-04
+published: 2026-03-05
 description: Markdown 语法简单、专注内容，几分钟就能上手。本文简要总结博客写作最常用的几招，并附实例。
 tags: ["Markdown", "博客", "写作"]
 category: 编程与技术
