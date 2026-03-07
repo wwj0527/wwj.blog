@@ -69,6 +69,9 @@ export type SiteConfig = {
 		devices: boolean; // 设备页面开关
 	};
 
+	// 首页文章显示模式
+	homePageMode?: "all" | "pinned_only";
+
 	// 文章列表布局配置
 	postListLayout: {
 		defaultMode: "list" | "grid"; // 默认布局模式：list=列表模式，grid=网格模式

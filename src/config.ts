@@ -86,6 +86,11 @@ export const siteConfig: SiteConfig = {
 		mode: "local", // 番剧页面模式："bangumi" 使用Bangumi API，"local" 使用本地配置，"bilibili" 使用Bilibili API
 	},
 
+	// 首页文章显示模式
+	// "all" = 显示全部文章（与归档相同，分页展示）
+	// "pinned_only" = 只显示置顶文章，其余去归档查看
+	homePageMode: "pinned_only" as const,
+
 	// 文章列表布局配置
 	postListLayout: {
 		// 默认布局模式："list" 列表模式（单列布局），"grid" 网格模式（双列布局）
