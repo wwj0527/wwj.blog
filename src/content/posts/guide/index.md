@@ -5,6 +5,7 @@ description: 这是我用 Astro + Mizuki 搭建的个人博客，将记录编程
 tags: ["随笔"]
 category: "日志"
 draft: false
+pinned: true
 ---
 
 这是我的第一篇文章，用来测试整个站点是否正常工作。  

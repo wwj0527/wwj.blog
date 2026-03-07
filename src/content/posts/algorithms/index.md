@@ -2,9 +2,10 @@
 title: 基础算法笔记
 published: 2026-03-06
 description: 按 DP、图论、字符串、数据结构等分类整理的算法笔记，包含思路与代码实现。
-tags: ["算法", "数据结构", "LeetCode", "AcWing"]
+tags: ["算法", "数据结构"]
 category: 编程与技术
 draft: false
+pinned: true
 ---
 
 本文档将基础算法按以下分类整理，便于查阅和复习。
