@@ -340,14 +340,13 @@ export const announcementConfig: AnnouncementConfig = {
 };
 
 export const musicPlayerConfig: MusicPlayerConfig = {
-	enable: true, // 启用音乐播放器功能
-	mode: "spotify", // 音乐播放器模式：meting=网易云等 | local=本地音频 | spotify=Spotify 嵌入
+	enable: false, // 启用音乐播放器功能（暂时闲置）
+	mode: "meting", // 音乐播放器模式：meting=网易云等 | local=本地音频
 	meting_api:
 		"https://meting.mysqil.com/api?server=:server&type=:type&id=:id&auth=:auth&r=:r", // Meting API 地址（meting 模式用）
 	id: "14164869977", // 歌单ID（meting 模式用）
 	server: "netease", // 音乐源服务器
 	type: "playlist", // 播单类型
-	spotifyPlaylistId: "0SAg9BnVnUGj88OmYqUYIO", // soul 歌单
 };
 
 export const footerConfig: FooterConfig = {

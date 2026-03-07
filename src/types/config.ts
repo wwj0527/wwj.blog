@@ -325,12 +325,11 @@ export type AnnouncementConfig = {
 
 export type MusicPlayerConfig = {
 	enable: boolean; // 是否启用音乐播放器功能
-	mode: "meting" | "local" | "spotify"; // 音乐播放器模式
+	mode: "meting" | "local"; // 音乐播放器模式
 	meting_api: string; // Meting API 地址
 	id: string; // 歌单ID（Meting 模式）
 	server: string; // 音乐源服务器
 	type: string; // 音乐类型
-	spotifyPlaylistId?: string; // Spotify 歌单 ID（mode 为 spotify 时必填）
 };
 
 export type FooterConfig = {
